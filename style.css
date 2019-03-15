@@ -1,0 +1,56 @@
+/* --- Globalne --- */
+* {
+	transition-duration: 0.4s;
+	box-sizing: border-box;
+}
+body {
+	background: gray;
+	font-family: Verdana;
+}
+/* --- --- --- */
+
+/* --- Części strony --- */
+#titlebar {
+	display: flex;
+	justify-content: space-between;
+}
+.column {
+	display: grid;
+	float: left;
+	width: 50%;
+	padding: 10px;
+	padding-bottom: 5vh;
+}
+#home:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+/* --- --- --- */
+
+/* --- Kontrolki --- */
+#sl_btn { /* Przycisk zapisu */
+	font-size: 5vw;
+	width: 50%;
+	background: #aaa;
+	border: none;
+}
+#sl_btn:hover {
+	background: #bbb;
+}
+#sl_btn:active {
+	background: #ccc;
+}
+
+#title {
+	font-size: 10vw;
+}
+
+.linp { /* Tytuły pól */
+	margin-top: 10px;
+}
+input, select { /* Pola */
+	max-width: 40vw;
+	min-height: 7vh;
+}
+/* --- --- --- */

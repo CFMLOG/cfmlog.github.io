@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<title>LOGI</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="script.js"></script>
+	</head>
+	
+	<body>
+		<div id="titlebar">
+			<t1 id="title">GLOLOG</t1>
+			<button id="sl_btn">Zapisz log</button>
+		</div>
+		
+		<div class="home">
+			<div class="column" style="background-color:#aaa;">
+				<label class="linp" id="zk">Znak korespondenta</label>
+				<input id="izk"></input>
+				
+				<label class="linp" id="rn">RTSn</label>
+				<input id="irn" value="59"></input>
+				
+				<label class="linp" id="gn">Grupa nadawcza</label>
+				<input id="ign"></input>
+				
+				<label class="linp" id="zn">Znak nadawcy</label>
+				<input id="izn"></input>
+			</div>
+
+			 <div class="column" style="background-color:#bbb;">
+				<label class="linp" id="ro">RTSo</label>
+				<input id="iro" value="59"></input>
+				
+				<label class="linp" id="go">Grupa odebrana</label>
+				<input id="igo"></input>
+				
+				<label class="linp" id="po">Pasmo</label>
+				<select id="ipo">
+					<option>160m</option>
+					<option selected="selected">80m</option>
+					<option>40m</option>
+					<option>20m</option>
+					<option>15m</option>
+					<option>10m</option>			
+					<option>6m</option>
+					<option>2m</option>
+				</select>
+				
+				<label class="linp" id="ea">Emisja</label>
+				<select id="iea">
+					<option selected="selected">SSB</option>			
+					<option>CW</option>
+					<option>FM</option>
+				</select>
+			</div>
+		</div>
+		<h1>TO WERSJA ALPHA/POGLĄDOWA</h1>
+	</body>
+</html>

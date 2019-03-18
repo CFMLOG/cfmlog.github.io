@@ -4,8 +4,8 @@
 	box-sizing: border-box;
 }
 body {
-	background: gray;
-	font-family: Verdana;
+	background-image: linear-gradient(to right, orange , purple);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 /* --- --- --- */
 
@@ -17,14 +17,20 @@ body {
 .column {
 	display: grid;
 	float: left;
-	width: 50%;
+	width: 25%;
 	padding: 10px;
 	padding-bottom: 5vh;
 }
-#home:after {
-	content: "";
-	display: table;
-	clear: both;
+#log_history table tr, #log_history table td {
+	border: 2px black solid;
+}
+#log_history table {
+	box-align: center;
+	border-collapse: collapse;
+}
+#log_history table td {
+	text-transform: uppercase;
+	font-size: 1.15vw;
 }
 /* --- --- --- */
 
@@ -47,10 +53,23 @@ body {
 }
 
 .linp { /* Tytuły pól */
+	font-size: 2vw;
 	margin-top: 10px;
 }
 input, select { /* Pola */
-	max-width: 40vw;
+	font-size: 3vw;
+	max-width: 23vw;
 	min-height: 7vh;
+	text-transform: uppercase;
 }
 /* --- --- --- */
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}

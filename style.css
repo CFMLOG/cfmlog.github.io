@@ -5,6 +5,8 @@
 }
 body {
 	background-image: linear-gradient(to right, orange , purple);
+	background: url(bg.jpg) no-repeat;
+	background-size: cover;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 /* --- --- --- */
@@ -13,58 +15,148 @@ body {
 #titlebar {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 10px;
 }
 .column {
+	min-height: 70vh;
+	max-height: 70vh;
 	display: grid;
 	float: left;
-	width: 25%;
+	width: 17%;
 	padding: 10px;
 	padding-bottom: 5vh;
 }
+#column_table {
+	width:66%;
+	max-height: 55vh;
+	overflow-y:auto;
+}
 #log_history table tr, #log_history table td {
-	border: 2px black solid;
+	border: 2px #8c9196 solid;
 }
 #log_history table {
-	box-align: center;
+	display: flex;
+	justify-content: center;
 	border-collapse: collapse;
 }
 #log_history table td {
 	text-transform: uppercase;
 	font-size: 1.15vw;
 }
+#btns {
+	display: flex;
+}
 /* --- --- --- */
 
 /* --- Kontrolki --- */
-#sl_btn { /* Przycisk zapisu */
-	font-size: 5vw;
+#sl_btn, #sf_btn { /* Przycisk zapisu */
+	padding: 3vw;
+	font-size: 3vw;
 	width: 50%;
-	background: #aaa;
+	background: rgba(158, 158, 158, 0.3);
 	border: none;
 }
-#sl_btn:hover {
+#sl_btn:focus, #sf_btn:focus, #return_btn:focus, #save_btn:focus {
 	background: #bbb;
 }
-#sl_btn:active {
+#sl_btn:hover, #sf_btn:hover,  #return_btn:hover, #save_btn:hover {
 	background: #ccc;
 }
-
+#return_btn, #save_btn {
+	color: white;
+	width: 45%;
+	background: #2c3e50;
+	border: none;
+	padding: 5px;
+	margin-top: 5px;
+}
+td {
+	color: white;
+	padding: 5px;
+	text-align: center;
+	min-width: 4vw;
+	background: #2c3e50;
+	white-space: nowrap;
+}
 #title {
-	font-size: 10vw;
+	background: rgba(158, 158, 158, 0.3);
+	padding: 3vw;
+	font-size: 7vw;
 }
 
 .linp { /* Tytuły pól */
-	font-size: 2vw;
+	font-size: 1.4vw;
 	margin-top: 10px;
 }
 input, select { /* Pola */
-	font-size: 3vw;
-	max-width: 23vw;
+	padding: 5px;
+	color: white;
+	background: #2c3e50;
+	border: none;
+	font-size: 2vw;
+	max-width: 15vw;
 	min-height: 7vh;
 	text-transform: uppercase;
 }
+#ipo{
+	text-transform: lowercase;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	outline: 0;
+	box-shadow: none;
+	border: 0 !important;
+	background: #2c3e50;
+	background-image: none;
+  }
+  .select {
+	position: relative;
+	display: block;
+	line-height: 3;
+	background: #2c3e50;
+	overflow: hidden;
+	z-index: 4;
+  }
+  select {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0 0 0 .5em;
+	color: #fff;
+	cursor: pointer;
+  }
+  select::-ms-expand {
+	display: none;
+  }
+  /* Arrow */
+  .select::after {
+	content: '\25BC';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 5;
+	padding: 0 1em;
+	background: #34495e;
+	pointer-events: none;
+  }
+  /* Transition */
+  .select:hover::after {
+	color: #f39c12;
+  }
+  .select::after {
+	-webkit-transition: .25s all ease;
+	-o-transition: .25s all ease;
+	transition: .25s all ease;
+  }
+
 /* --- --- --- */
 
-/* Hide HTML5 Up and Down arrows. */
+/* UKRYWANIE STRZAŁEK Z INPUT'A HTML5 */
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -73,3 +165,101 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+#blurpage{
+	filter:blur(8px);
+	position: absolute;
+	background: #aaa;
+	opacity:0.9;
+	width: 140%;
+	height: 140%;
+	display: none;
+	margin: -100px;
+	z-index: 100;
+
+}
+#savetofile_container{
+	z-index: 1000;
+	padding: 10px;
+	display: none;
+	position: absolute;
+	background: #aaa;
+	width: 16.5vw;
+	margin-left: 42.5vw;
+	margin-top: 30vh;
+}
+#savetofile_container input{
+	text-transform: none;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+/* WIDOK DLA MNEIJSZYCH EKRANÓW (do 900px) */
+@media only screen and (max-width: 900px) {
+	#savetofile_container{
+		width: 70vw;
+		padding: 30px;
+		z-index: 1000;
+		margin-left: 15vw;
+		margin-top: 30vh;
+	}
+
+	.column{
+		width: 50%;
+		max-height: none;
+		min-height: none;
+	}
+	#log_history table td {
+		text-transform: uppercase;
+		font-size: 4vw;
+	}
+	#log_history {
+		width: 100%;
+
+	}
+	input, select { /* Pola */
+		font-size: 5vw;
+		max-width: 42vw;
+		min-height: 7vh;
+		text-transform: uppercase;
+	}
+
+	#comment, #operator {
+		max-width: 55vw;
+	}
+
+	#column_table{
+		margin-bottom: 10px;
+		width: 100%;
+		overflow-y: unset;
+		max-height: none;
+	}
+
+	#log_history table tr td:nth-child(3),#log_history table tr td:nth-child(5),#log_history table tr td:nth-child(6),#log_history table tr td:nth-child(7),#log_history table tr td:nth-child(8),#log_history table tr td:nth-child(9),#log_history table tr td:nth-child(10){
+		display:none;
+
+	}
+	#sl_btn, #sf_btn {
+		font-size: 5vw;
+	}
+	.linp { /* Tytuły pól */
+		font-size: 4vw;
+		margin-top: 10px;
+	}
+
+}
+

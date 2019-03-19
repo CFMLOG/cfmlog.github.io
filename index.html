@@ -5,85 +5,99 @@
 	<meta charset="UTF-8">
 	<title>LOGI</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="script.js"></script>
 </head>
 
-<body onkeypress="handleEnter(event)">
+<body>
+	<!-- <div id="blurpage"></div> -->
+	<div id="savetofile_container">
+		<div class="select">
+			<select id="file_format">
+				<option value="adif">ADIF</option>
+			</select>
+		</div>
+		<label class="linp">komentarz</label>
+		<input id="comment" autocomplete="off"></input>
+		<label class="linp">operator</label>
+		<input id="operator" autocomplete="off"></input>
+		<div style="display: flex; justify-content: space-between;"><button id="return_btn" >POWRÓT</button>
+		<button id="save_btn" >ZAPISZ</button></div>
+	</div>
+
 	<div id="titlebar">
-		<t1 id="title">GLOLOG</t1>
-		<button id="sl_btn">Zapisz log</button>
+		<t1 id="title"> CFMLOG </t1>
+		<div id="btns">
+			<button id="sf_btn" tabindex="-1">Zapisz<br>log</button>
+			<button id="sl_btn" tabindex="-1">Dodaj<br>QSO</button>
+		</div>
 	</div>
 	<div id="container">
 		<div class="home">
-			<div class="column" style="background-color:#aaa;">
+			<div class="column" style="background-color: rgba(255, 255, 255, 0.3);">
 				<label class="linp" id="zk">Znak korespondenta</label>
-				<input id="izk"></input>
+				<input id="izk" autocomplete="off" tabindex="1"></input>
 
 				<label class="linp" id="go">Grupa odebrana</label>
-				<input type="number" id="igo"></input>
+				<input type="number" id="igo" autocomplete="off" tabindex="2"></input>
 
 				<label class="linp" id="gn">Grupa nadana</label>
-				<input id="ign" value="001" disabled></input>
+				<input id="ign" value="001" disabled autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="po">Pasmo</label>
-				<select id="ipo">
-					<option>160m</option>
-					<option selected="selected">80m</option>
-					<option>40m</option>
-					<option>20m</option>
-					<option>17m</option>
-					<option>15m</option>
-					<option>12m</option>
-					<option>10m</option>
-					<option>6m</option>
-					<option>2m</option>
-				</select>
+				<div class="select">
+					<select id="ipo" tabindex="-1">
+						<option>160m</option>
+						<option selected="selected">80m</option>
+						<option>40m</option>
+						<option>20m</option>
+						<option>17m</option>
+						<option>15m</option>
+						<option>12m</option>
+						<option>10m</option>
+						<option>6m</option>
+						<option>2m</option>
+					</select>
+				</div>
 
 
 			</div>
 
-			<div class="column" style="background-color:#bbb;">
+			<div class="column" style="background-color:rgba(212, 212, 212, 0.3);">
 				<label class="linp" id="zn">Znak nadawcy</label>
-				<input id="izn"></input>
+				<input id="izn" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="ro">RTSo</label>
-				<input id="iro" value="59"></input>
+				<input id="iro" value="59" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="rn">RTSn</label>
-				<input id="irn" value="59"></input>
+				<input id="irn" value="59" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="ea">Emisja</label>
-				<select id="iea">
-					<option selected="selected">SSB</option>
-					<option>CW</option>
-					<option>FM</option>
-				</select>
+				<div class="select">
+					<select id="iea" tabindex="-1">
+						<option selected="selected">SSB</option>
+						<option>CW</option>
+						<option>FM</option>
+					</select>
+				</div>
 			</div>
 		</div>
-		<div class="column" style="background-color:#ccc; width: 50%">
+		<div class="column" id="column_table" style="background-color:rgba(158, 158, 158, 0.3);">
 			<div id="log_history">
 				<table id="log_table">
-					
 					<tr>
-						<td>Znak Korespondenta</td>
-						<td>Grupa odebrana</td>
+						<td>Znak<br>Korespondenta</td>
+						<td>Grupa<br>odebrana</td>
 						<td>RSTo</td>
-						<td>Grupa nadana</td>
+						<td>Grupa<br>nadana</td>
 						<td>RSTn</td>
+						<td>Data</td>
+						<td>Czas</td>
 						<td>Pasmo</td>
 						<td>Emisja</td>
-						<td>Znak nadawcy</td>
+						<td>Znak<br>nadawcy</td>
 					</tr>
-					<tr>
-							<td>SP1ASDFGHJ</td>
-							<td>001</td>
-							<td>59</td>
-							<td>001</td>
-							<td>59</td>
-							<td>80m</td>
-							<td>SSB</td>
-							<td>SQ2ZXCVBNM</td>
-						</tr>
 				</table>
 			</div>
 		</div>

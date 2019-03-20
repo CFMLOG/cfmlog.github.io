@@ -44,15 +44,21 @@ function save_log() {
 		po: GetText("ipo"),
 		ea: GetText("iea"),
 		cs: (date.getHours().toString()+date.getMinutes().toString()+date.getSeconds().toString()),
-		da: (date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate())
+		da: (date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate())
 		};
 	var isOK = true;
-	if(log.zn == "" || log.zk == "" || log.rn == "" || log.ro == "" || log.go == "")
-		isOK = false;
+	
+	
+	if(log.rn == ""){ document.getElementById("irn").focus(); isOK = false;}
+	if(log.ro == ""){ document.getElementById("iro").focus(); isOK = false;}
+	if(log.go == ""){ document.getElementById("igo").focus(); isOK = false;}
+	if(log.zk == ""){ document.getElementById("izk").focus(); isOK = false;}
+	if(log.zn == ""){ document.getElementById("izn").focus(); isOK = false;}
 
-	if(!isOK)
-		alert("Wypełnij wszystkie pola!");
-	else{
+	//if(log.zn == "" || log.zk == "" || log.rn == "" || log.ro == "" || log.go == "")
+		//isOK = false;
+
+	if(isOK){
 
 		logs[logs.length] = log;
 
@@ -62,7 +68,7 @@ function save_log() {
 			str_new_gn += "0";
 		str_new_gn += new_gn;
 		document.getElementById("ign").value = str_new_gn;
-		clear_field();
+		//clear_field();
 		view_log();
 		document.getElementById("izk").focus();
 	}
@@ -70,8 +76,8 @@ function save_log() {
 wiersz = "";
 function view_log() {
 
-	var table = document.getElementById("log_table");
-	var row = table.insertRow(table.length);
+	var table = document.getElementById('log_table').getElementsByTagName('tbody')[0];
+	var row = table.insertRow(0);
 
 	var zk = row.insertCell(0);
 	var go = row.insertCell(1);
@@ -127,13 +133,13 @@ function adif_save(operator, comment){
 	console.log("aaa");
 	var text = "ADIF 2.0\nWYGENEROWANY PRZEZ CFMLOG http://github.com/kpxdi/glolog \n<EOH>\n";
 	for(var i =0;i<logs.length;i++){
-		text += "<QSO_DATE:8>"+logs[i].date + " <TIME_ON:6>"+ logs[i].time +" <BAND:3>"+ logs[i].po +" <FREQ:5>3.700 <MODE:3>"+ logs[i].ea;
-		text +=	"<CALL:6>" + logs[i].zk + " <RST_RCVD:2>" + logs[i].ro + " <SRX:3>" + logs[i].go + " <RST_SENT:2>"+ logs[i].rn +" <STX:9>"+ logs[i].gn + logs[i].zn +"<COMMENT:5>"+ comment;
-		text += "<OPERATOR:5>"+ operator +"<CONTEST_ID:5> 2019 <EOR>\n";
+		text += "<QSO_DATE:"+ logs[i].da.length +">"+logs[i].da + " <TIME_ON:"+ logs[i].cs.length +">"+ logs[i].cs +" <BAND:"+ logs[i].po.length +">"+ logs[i].po +" <FREQ:5>3.700 <MODE:"+ logs[i].ea.length +">"+ logs[i].ea;
+		text +=	"<CALL:"+ logs[i].zk.length +">" + logs[i].zk + " <RST_RCVD:"+logs[i].ro.length+">" + logs[i].ro + " <SRX:"+ logs[i].go.length +">" + logs[i].go + " <RST_SENT:"+ logs[i].rn.length +">"+ logs[i].rn +" <STX:"+ (logs[i].gn.length + logs[i].zn.length) +">"+ logs[i].gn + logs[i].zn +"<COMMENT:" + comment.length + ">"+ comment;
+		text += "<OPERATOR:"+ operator.length +">"+ operator +"<CONTEST_ID:5> 2019 <EOR>\n";
 	}
     blob = new Blob([text], { type: 'text/plain' }),
     link = document.createElement('a');
-	link.download = date.getFullYear()+":"+date.getMonth()+":"+date.getDate()+":"+date.getHours()+":"+date.getMinutes()+".adi";
+	link.download = date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate()+":"+date.getHours()+":"+date.getMinutes()+".adi";
 	link.href = (window.webkitURL || window.URL).createObjectURL(blob);
 	link.dataset.downloadurl = ['text/plain', link.download, link.href].join(':');
 	link.click();

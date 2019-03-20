@@ -35,13 +35,17 @@ body {
 	border: 2px #8c9196 solid;
 }
 #log_history table {
-	display: flex;
-	justify-content: center;
-	border-collapse: collapse;
+	display: block;
+	
 }
 #log_history table td {
 	text-transform: uppercase;
 	font-size: 1.15vw;
+}
+#log_history{
+	display:flex;
+	justify-content: center;
+	border-collapse: collapse;
 }
 #btns {
 	display: flex;
@@ -78,6 +82,7 @@ td {
 	background: #2c3e50;
 	white-space: nowrap;
 }
+
 #title {
 	background: rgba(158, 158, 158, 0.3);
 	padding: 3vw;

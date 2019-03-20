@@ -11,6 +11,7 @@
 
 <body>
 	<!-- <div id="blurpage"></div> -->
+	<button id="rst_log_btn" style="position:absolute;z-index:2; bottom: 10px; right: 10px;">RESET LOGU</button>
 	<div id="savetofile_container">
 		<div class="select">
 			<select id="file_format">
@@ -68,10 +69,10 @@
 				<input id="izn" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="ro">RTSo</label>
-				<input id="iro" value="59" autocomplete="off" tabindex="-1"></input>
+				<input type="number" id="iro" value="59" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="rn">RTSn</label>
-				<input id="irn" value="59" autocomplete="off" tabindex="-1"></input>
+				<input type="number" id="irn" value="59" autocomplete="off" tabindex="-1"></input>
 
 				<label class="linp" id="ea">Emisja</label>
 				<div class="select">
@@ -107,6 +108,7 @@
 			</div>
 		</div>
 	</div>
+	<script>window.onload = checkcache();</script>
 </body>
 
 </html>

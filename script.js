@@ -1,4 +1,5 @@
 logs = [];
+var editmode =null;
 //									PRZYCISKI
 document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sl_btn").addEventListener("click", save_log);
@@ -12,13 +13,175 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("save_btn").addEventListener("click", save_to_file);
 }, false);
+document.addEventListener("DOMContentLoaded", function() {
+	document.getElementById("rst_log_btn").addEventListener("click", reset_log);
+}, false);
 
 //			PRZYCISK DODAJ QSO POD ENTEREM
 document.addEventListener("keypress", function(e){
 	if (e.keyCode === 13) {
-		document.getElementById("sl_btn").click();
+		if(editmode==null)document.getElementById("sl_btn").click();
+		else {
+			accept_edit_table();
+		}
 	}
 });
+function reset_log(){
+	logs = [];
+	localStorage['logs'] = "";
+	document.getElementById("log_table").getElementsByTagName("TBODY")[0].innerHTML ="";
+}
+function accept_edit_table(){
+	var id = editmode.parentElement.id;
+	if(editmode.getElementsByTagName("input").length >0){
+		if(editmode.getElementsByTagName("input")[0].value == ""){
+			return 0;
+		}
+	}
+	switch(editmode.id){
+		case "zk":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text.toUpperCase();
+			logs[id].zk = text.toUpperCase();
+			break;
+		case "go":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			var new_gn= parseInt(text);
+			var str_new_gn ="";
+			for(var i = 0; i <3 - (new_gn+"").length;i++)
+				str_new_gn += "0";
+			str_new_gn += new_gn;
+			editmode.innerHTML = str_new_gn;
+			logs[id].go = str_new_gn;
+			break;
+		case "ro":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text;
+			logs[id].ro = text;
+			break;
+		case "gn":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			var new_gn= parseInt(text);
+			var str_new_gn ="";
+			for(var i = 0; i <3 - (new_gn+"").length;i++)
+				str_new_gn += "0";
+			str_new_gn += new_gn;
+			editmode.innerHTML = str_new_gn;
+			logs[id].gn = str_new_gn;
+			break;
+		case "rn":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text;
+			logs[id].rn = text;
+			break;
+		case "da":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text;
+			logs[id].da = text;
+			break;
+		case "cs":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text;
+			logs[id].cs = text;
+			break;
+		case "po":
+			var text = editmode.getElementsByTagName("select")[0].value;
+			editmode.innerHTML = text;
+			logs[id].po = text;
+			break;
+		case "ea":
+			var text = editmode.getElementsByTagName("select")[0].value;
+			editmode.innerHTML = text;
+			logs[id].ea = text;
+			break;
+		case "zn":
+			var text = editmode.getElementsByTagName("input")[0].value;
+			editmode.innerHTML = text.toUpperCase();
+			logs[id].zn = text.toUpperCase();
+			break;
+	}
+	localStorage['logs'] = JSON.stringify(logs);
+	editmode = null;
+}
+
+
+//CASHOWANIE ZMIENNEJ LOGS (ODCZYT)
+function checkcache(){
+	var click =0;
+	document.body.addEventListener("click", function (evt) {
+		click++;
+		if(click === 1){	
+			setTimeout(function(){click =0;},400);
+		}else if(click===2){
+			if(editmode == null) {
+			click =0;
+			var clicked_obj = evt.target;
+			if(clicked_obj.tagName =="TD" && clicked_obj.parentElement.parentElement.nodeName =="TBODY"){
+				editmode =clicked_obj;
+				var text = clicked_obj.innerHTML;
+				if(clicked_obj.id == "ro" || clicked_obj.id == "rn" || clicked_obj.id == "go" ||clicked_obj.id == "gn"){
+					clicked_obj.innerHTML = "<input type=\"number\"class=\"sml_input\" value=\""+text+"\"></input>";
+					clicked_obj.getElementsByTagName("input")[0].focus();
+				}else if(clicked_obj.id=="po"){
+					clicked_obj.innerHTML = '<select class=\"sml_input\"><option>160m</option><option selected="selected">80m</option><option>40m</option><option>20m</option><option>17m</option><option>15m</option><option>12m</option><option>10m</option><option>6m</option><option>2m</option></select>';
+					clicked_obj.getElementsByTagName("select")[0].focus();
+				}else{
+					clicked_obj.innerHTML = "<input class=\"sml_input\" value=\""+text+"\"></input>";
+					clicked_obj.getElementsByTagName("input")[0].focus();
+				}
+			}
+		}else{
+			accept_edit_table();
+		}
+	}
+
+	});
+	
+
+	var stored = localStorage['logs'];
+	if (stored) {
+		logs = JSON.parse(stored);
+		var table = document.getElementById('log_table').getElementsByTagName('tbody')[0];
+
+		for(var i =0;i<logs.length;i++){
+			var row = table.insertRow(0);
+			row.id = i;
+			var zk = row.insertCell(0);
+			var go = row.insertCell(1);
+			var ro = row.insertCell(2);
+			var gn = row.insertCell(3);
+			var rn = row.insertCell(4);
+			var da = row.insertCell(5);
+			var cs = row.insertCell(6);
+			var po = row.insertCell(7);
+			var ea = row.insertCell(8);
+			var zn = row.insertCell(9);
+			zk.id = "zk";
+			go.id = "go";
+			ro.id = "ro";
+			gn.id = "gn";
+			rn.id = "rn";
+			da.id = "da";
+			cs.id = "cs";
+			po.id = "po";
+			ea.id = "ea";
+			zn.id = "zn";
+			zk.innerHTML = logs[i].zk;
+			go.innerHTML = logs[i].go;
+			ro.innerHTML = logs[i].ro;
+			gn.innerHTML = logs[i].gn;
+			rn.innerHTML = logs[i].rn;
+			da.innerHTML = logs[i].da;
+			cs.innerHTML = logs[i].cs;
+			po.innerHTML = logs[i].po;
+			ea.innerHTML = logs[i].ea;
+			zn.innerHTML = logs[i].zn;
+
+
+		}
+	
+	}
+}
 
 function GetText(id) {
 	return document.getElementById(id).value;
@@ -33,6 +196,7 @@ function clear_field(){
 
 function save_log() {
 	var date = new Date();
+
 	 log = {				// w tym miejscu zostały użyte skróty. przykładowo: zk ozn. Znak Korespondenta
 							//									 a izk - skrót od input znak korespondenta.
 		zn: GetText("izn"),
@@ -55,13 +219,10 @@ function save_log() {
 	if(log.zk == ""){ document.getElementById("izk").focus(); isOK = false;}
 	if(log.zn == ""){ document.getElementById("izn").focus(); isOK = false;}
 
-	//if(log.zn == "" || log.zk == "" || log.rn == "" || log.ro == "" || log.go == "")
-		//isOK = false;
-
 	if(isOK){
 
 		logs[logs.length] = log;
-
+		localStorage['logs'] = JSON.stringify(logs);
 		var new_gn= parseInt(log.gn)+1;
 		var str_new_gn ="";
 		for(var i = 0; i <3 - (new_gn+"").length;i++)
@@ -78,6 +239,7 @@ function view_log() {
 
 	var table = document.getElementById('log_table').getElementsByTagName('tbody')[0];
 	var row = table.insertRow(0);
+	row.id = logs.length-1;
 
 	var zk = row.insertCell(0);
 	var go = row.insertCell(1);
@@ -89,6 +251,16 @@ function view_log() {
 	var po = row.insertCell(7);
 	var ea = row.insertCell(8);
 	var zn = row.insertCell(9);
+	zk.id = "zk";
+	go.id = "go";
+	ro.id = "ro";
+	gn.id = "gn";
+	rn.id = "rn";
+	da.id = "da";
+	cs.id = "cs";
+	po.id = "po";
+	ea.id = "ea";
+	zn.id = "zn";
 
 	zk.innerHTML = log.zk;
 	go.innerHTML = log.go;

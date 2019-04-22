@@ -3,15 +3,13 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>LOGI</title>
+	<title>CFMLOG</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="script.js"></script>
 </head>
 
 <body>
-	<!-- <div id="blurpage"></div> -->
-	<button id="rst_log_btn" style="position:absolute;z-index:2; bottom: 10px; right: 10px;">RESET LOGU</button>
 	<div id="savetofile_container">
 		<div class="select">
 			<select id="file_format">
@@ -22,13 +20,16 @@
 		<input id="comment" autocomplete="off"></input>
 		<label class="linp">operator</label>
 		<input id="operator" autocomplete="off"></input>
-		<div style="display: flex; justify-content: space-between;"><button id="return_btn" >POWRÓT</button>
-		<button id="save_btn" >ZAPISZ</button></div>
+		<div style="display: flex; justify-content: space-between;">
+			<button id="return_btn">POWRÓT</button>
+			<button id="save_btn">ZAPISZ</button>
+		</div>
 	</div>
 
 	<div id="titlebar">
 		<t1 id="title"> CFMLOG </t1>
 		<div id="btns">
+			<button id="rst_log_btn" tabindex="-1">Wyczyść<br>log</button>
 			<button id="sf_btn" tabindex="-1">Zapisz<br>log</button>
 			<button id="sl_btn" tabindex="-1">Dodaj<br>QSO</button>
 		</div>
@@ -60,8 +61,6 @@
 						<option>2m</option>
 					</select>
 				</div>
-
-
 			</div>
 
 			<div class="column" style="background-color:rgba(212, 212, 212, 0.3);">
@@ -88,27 +87,23 @@
 			<div id="log_history">
 				<table id="log_table">
 					<thead>
-					<tr>
-						<td>Znak<br>Korespondenta</td>
-						<td>Grupa<br>odebrana</td>
-						<td>RSTo</td>
-						<td>Grupa<br>nadana</td>
-						<td>RSTn</td>
-						<td>Data</td>
-						<td>Czas</td>
-						<td>Pasmo</td>
-						<td>Emisja</td>
-						<td>Znak<br>nadawcy</td>
-					</tr>
+						<tr>
+							<td>Znak<br>Korespondenta</td>
+							<td>Grupa<br>odebrana</td>
+							<td>RSTo</td>
+							<td>Grupa<br>nadana</td>
+							<td>RSTn</td>
+							<td>Data</td>
+							<td>Czas</td>
+							<td>Pasmo</td>
+							<td>Emisja</td>
+							<td>Znak<br>nadawcy</td>
+						</tr>
 					</thead>
-					<tbody>
-							
-					</tbody>
+					<tbody></tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-	<script>window.onload = checkcache();</script>
 </body>
-
 </html>

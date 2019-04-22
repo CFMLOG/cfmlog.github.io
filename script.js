@@ -3,6 +3,7 @@ var editmode =null;
 //									PRZYCISKI
 document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sl_btn").addEventListener("click", save_log);
+	checkcache();
 }, false);
 document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("sf_btn").addEventListener("click", save_to_file_open);
@@ -30,6 +31,7 @@ function reset_log(){
 	logs = [];
 	localStorage['logs'] = "";
 	document.getElementById("log_table").getElementsByTagName("TBODY")[0].innerHTML ="";
+	alert("Wyczyszczono log");
 }
 function accept_edit_table(){
 	var id = editmode.parentElement.id;
@@ -303,7 +305,7 @@ function save_to_file(){
 function adif_save(operator, comment){
 	var date = new Date;
 	console.log("aaa");
-	var text = "ADIF 2.0\nWYGENEROWANY PRZEZ CFMLOG http://github.com/kpxdi/glolog \n<EOH>\n";
+	var text = "ADIF 2.0\nWYGENEROWANY PRZEZ CFMLOG http://github.com/kpxdi/cfmlog \n<EOH>\n";
 	for(var i =0;i<logs.length;i++){
 		text += "<QSO_DATE:"+ logs[i].da.length +">"+logs[i].da + " <TIME_ON:"+ logs[i].cs.length +">"+ logs[i].cs +" <BAND:"+ logs[i].po.length +">"+ logs[i].po +" <FREQ:5>3.700 <MODE:"+ logs[i].ea.length +">"+ logs[i].ea;
 		text +=	"<CALL:"+ logs[i].zk.length +">" + logs[i].zk + " <RST_RCVD:"+logs[i].ro.length+">" + logs[i].ro + " <SRX:"+ logs[i].go.length +">" + logs[i].go + " <RST_SENT:"+ logs[i].rn.length +">"+ logs[i].rn +" <STX:"+ (logs[i].gn.length + logs[i].zn.length) +">"+ logs[i].gn + logs[i].zn +"<COMMENT:" + comment.length + ">"+ comment;

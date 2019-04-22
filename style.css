@@ -53,17 +53,18 @@ body {
 /* --- --- --- */
 
 /* --- Kontrolki --- */
-#sl_btn, #sf_btn { /* Przycisk zapisu */
+#sl_btn, #sf_btn, #rst_log_btn { /* Przycisk zapisu */
+	margin-left: 10px;
+  border: 1vw solid #2c3e50;
 	padding: 3vw;
 	font-size: 3vw;
 	width: 50%;
 	background: rgba(158, 158, 158, 0.3);
-	border: none;
 }
-#sl_btn:focus, #sf_btn:focus, #return_btn:focus, #save_btn:focus {
+#sl_btn:focus, #sf_btn:focus, #return_btn:focus, #save_btn:focus, #rst_log_btn:focus {
 	background: #bbb;
 }
-#sl_btn:hover, #sf_btn:hover,  #return_btn:hover, #save_btn:hover {
+#sl_btn:hover, #sf_btn:hover,  #return_btn:hover, #save_btn:hover, #rst_log_btn:hover {
 	background: #ccc;
 }
 #return_btn, #save_btn {
@@ -261,8 +262,8 @@ input[type="number"] {
 		display:none;
 
 	}
-	#sl_btn, #sf_btn {
-		font-size: 5vw;
+	#sl_btn, #sf_btn, #rst_log_btn {
+		font-size: 4vw;
 	}
 	.linp { /* Tytuły pól */
 		font-size: 4vw;
@@ -270,4 +271,3 @@ input[type="number"] {
 	}
 
 }
-
